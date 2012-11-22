@@ -1,0 +1,1 @@
+{"completed_in":0.0080,"max_id":251181337527058432,"max_id_str":"251181337527058432","page":1,"query":"%40edupainthiyoto","refresh_url":"?since_id=251181337527058432&q=%40edupainthiyoto","results":[],"results_per_page":15,"since_id":0,"since_id_str":"0"}

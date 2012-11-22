@@ -1,0 +1,43 @@
+/**
+* @version		1.0
+* @package		JMS accordion images Module
+* @copyright	Joommasters.com
+*/
+
+#jmsaccordion {
+	overflow:hidden;
+	position:relative;
+}
+.featured {
+	float:left;
+	overflow:hidden;
+	display:block;
+	position:absolute;
+}
+.slide-inner {
+	position:relative;
+	width:100%
+}
+.faceout {
+	display:block;
+	position:absolute;
+	right:0;
+	width:40px;
+	z-index:10;
+	background:transparent url(overlay.png) repeat-y scroll left top;
+}
+.slide_desc {
+	border-top:1px solid #EEEEEE;
+	background:#FFF;
+	opacity:0.4;
+	position:absolute;
+	bottom:0;
+	left:0;
+	width:100%;
+	padding:7px 10px;
+	text-align:left;
+}
+.slide_desc h3 {
+	margin:0px;
+
+}

@@ -1,0 +1,55 @@
+<?php
+/**
+ * @package Xpert Captions
+ * @version 1.1
+ * @author ThemeXpert http://www.themexpert.com
+ * @copyright Copyright (C) 2009 - 2011 ThemeXpert
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
+ *
+ */
+// no direct access
+defined( '_JEXEC' ) or die('Restricted access');
+
+$link = (int)$params->get('link');
+$title = (int)$params->get('title');
+$intro = (int)$params->get('intro');
+
+?>
+    <!--Xpert Captions by ThemeXpert- Start-->
+    <div id="<?php echo $module_id;?>">
+        <?php foreach($lists as $item):?>
+            <div class="xc-block <?php echo $params->get('animation');?>">
+
+                <?php if($link):?>
+                    <a href="<?php echo $item->link; ?>" class="<?php echo ($params->get('effect_apply') == 'caption')? 'xc-overlay' : 'xc-backdrop' ;?>">
+                <?php else: ?>
+                    <div class="<?php echo ($params->get('effect_apply') == 'caption')? 'xc-overlay' : 'xc-backdrop' ;?>">
+                <?php endif;?>
+
+                    <?php if($title OR $intro ):?>
+                        <div class="xc-details">
+
+                            <?php if($title):?>
+                                <h4><?php echo $item->title; ?></h4>
+                            <?php endif;?>
+
+                            <?php if($intro):?>
+                                <p><?php echo $item->introtext;?></p>
+                            <?php endif;?>
+                            
+                        </div>
+                    <?php endif;?>
+
+                <?php if($link):?>
+                    </a>
+                <?php else:?>
+                    </div>
+                <?php endif;?>
+        
+                <div class="<?php echo ($params->get('effect_apply') == 'caption')?'xc-backdrop' : 'xc-overlay' ;?>">
+                    <img src="<?php echo $item->image;?>" alt="<?php echo $item->title;?>" />
+                </div>
+            </div>
+        <?php endforeach;?>
+    </div>
+    <!--Xpert Captions by ThemeXpert- End-->

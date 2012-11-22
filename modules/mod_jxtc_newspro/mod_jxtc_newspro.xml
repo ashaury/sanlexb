@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5.0">
+	<name>JoomlaXTC News Pro Module</name>
+	<author>JoomlaXTC</author>
+	<copyright>Copyright (c) 2008 JoomlaXTC</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorUrl>www.joomlaxtc.com</authorUrl>
+	<version>1.0</version>
+	<description>JoomlaXTC News Pro - Visit www.joomlaxtc.com documents area for more help.</description>
+	<files>
+		<filename module="mod_jxtc_newspro">mod_jxtc_newspro.php</filename>
+		<filename>index.html</filename>
+		<filename>js/index.html</filename>
+		<filename>js/_class.noobSlide.js</filename>
+		<filename>buttons/index.html</filename>
+		<filename>buttons/black/index.html</filename>
+		<filename>buttons/black/next.gif</filename>
+		<filename>buttons/black/prev.gif</filename>
+		<filename>buttons/blue/index.html</filename>
+		<filename>buttons/blue/next.gif</filename>
+		<filename>buttons/blue/prev.gif</filename>
+		<filename>buttons/green/index.html</filename>
+		<filename>buttons/green/next.gif</filename>
+		<filename>buttons/green/prev.gif</filename>
+		<filename>buttons/grey/index.html</filename>
+		<filename>buttons/grey/next.gif</filename>
+		<filename>buttons/grey/prev.gif</filename>
+		<filename>buttons/orange/index.html</filename>
+		<filename>buttons/orange/next.gif</filename>
+		<filename>buttons/orange/prev.gif</filename>
+		<filename>buttons/pink/index.html</filename>
+		<filename>buttons/pink/next.gif</filename>
+		<filename>buttons/pink/prev.gif</filename>
+		<filename>buttons/purple/index.html</filename>
+		<filename>buttons/purple/next.gif</filename>
+		<filename>buttons/purple/prev.gif</filename>
+		<filename>buttons/red/index.html</filename>
+		<filename>buttons/red/next.gif</filename>
+		<filename>buttons/red/prev.gif</filename>
+	</files>
+	<params>
+		<param name="columns" type="text" default="1" label="Columns" description="Number of columns to show." />
+		<param name="rows" type="text" default="1" label="Rows" description="Number of rows to show" />
+		<param name="pages" type="text" default="3" label="Pages" description="Number of pages to show. A transition effect is applied when having more than one page." />
+		<param name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="Module class suffix." />
+		<param name="@spacer" type="spacer" default="PAGE MODE CONFIGURATION :" label="" description="" />
+		<param name="width" type="text" default="400" label="Width" description="Enter main articles area width (in pixels)." />
+		<param name="height" type="text" default="300" label="Height" description="Enter main articles area height (in pixels)" />
+		<param name="mode" type="list" default="h" label="Page transition" description="Page transition orientation when using multiple pages.">
+			<option value="v">Vertical</option>
+			<option value="h">Horizontal</option>
+		</param>
+		<param name="slidemode" type="radio" default="b" label="Slide mode" description="Define method to switch slides.">
+			<option value="a">Automatic</option>
+			<option value="b">Buttons</option>
+		</param>
+		<param name="pause" type="text" default="5000" label="Slide Pause" description="Pause between slides (in milliseconds)." />
+		<param name="buttonpos" type="list" default="3" label="Buttons Position" description="Control buttons location.">
+			<option value="2">On Top</option>
+			<option value="3">On Bottom</option>
+			<option value="4">On Top and Bottom</option>
+  	</param>
+		<param name="button" type="list" default="grey" label="Button Style" description="Button graphic set to use">
+			<option value="black">Black</option>
+			<option value="grey">Grey</option>
+			<option value="red">Red</option>
+			<option value="blue">Blue</option>
+			<option value="orange">Orange</option>
+			<option value="purple">Purple</option>
+			<option value="pink">Purple</option>
+			<option value="green">Green</option>
+  	</param>
+		<param name="@spacer" type="spacer" default="-MAIN- ARTICLES AREA CONFIGURATION :" label="" description="" />
+		<param name="secid" type="section" default="" label="Section ID" description="Article section" />
+		<param name="catid" type="category" default="" label="Category ID" description="Article category" />
+		<param name="user_id" type="list" default="0" label="Authors" description="A filter for the authors">
+			<option value="0">Anyone</option>
+			<option value="by_me">Added or modified by me</option>
+			<option value="not_me">Not added or modified by me</option>
+  	</param>
+		<param name="show_front" type="list" default="1" label="Show Frontpage Items" description="Include frontpage items?">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		<param name="ordering" type="list" default="create_dsc" label="Ordering" description="Ordering options">
+			<option value="c_dsc">Recently Added First</option>
+			<option value="m_dsc">Recently Modified First</option>
+  	</param>
+	  <param name="html" type="textarea" rows="10" cols="40" default="{intro}" label="HTML template" description="HTML/CSS code to display each news. Available tags are: {link}, {title}, {intro}, {introtext}, {introimage}, {section}, {category}, {date}, {moddate}, {author}, {authorid}." />
+		<param name="maxintro" type="text" default="" label="Max. intro length" description="Maximum length of {introtext} tag. Empty = no limit." />
+		<param name="@spacer" type="spacer" default="-MORE- AREA CONFIGURATION :" label="" description="" />
+		<param name="morepos" type="list" default="n" label="More position" description="Choose more area position.">
+			<option value="n">None</option>
+			<option value="t">Top</option>
+			<option value="b">Bottom</option>
+			<option value="l">Left</option>
+			<option value="r">Right</option>
+  	</param>
+		<param name="more" type="text" default="0" label="More titles" description="Offer links to more article titles." />
+		<param name="morecols" type="text" default="1" label="More Columns" description="Number of items to show horizontally. If number of articles is higher, multiple rows will be shown." />
+		<param name="moretext" type="text" default="" label="More legend" description="Legend to show in read more area." />
+		<param name="morergb" type="text" default="cccccc" label="More legend color" description="Legend color (format is: 000000)." />
+	  <param name="morehtml" type="textarea" rows="10" cols="40" default="{title}" label="Read more HTML template" description="HTML/CSS code to display each news. Available tags are: {link}, {title}, {intro}, {introtext}, {introimage}, {section}, {category}, {date}, {moddate}, {author}, {authorid}." />
+		<param name="moreintro" type="text" default="" label="Max. length for intro text" description="Maximum length of {introtext} tag. Empty = no limit." />
+	</params>
+	<params group="advanced">
+		<param name="cache" type="list" default="1" label="Caching" description="Select whether to cache the content of this module">
+			<option value="1">Use global</option>
+			<option value="0">No caching</option>
+		</param>
+		<param name="cache_time" type="text" default="900" label="Cache Time" description="The time before the module is recached" />
+	</params>
+</install>

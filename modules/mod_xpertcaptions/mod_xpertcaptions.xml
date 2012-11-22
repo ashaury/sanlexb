@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5.0" method="upgrade">
+    <name>Xpert Captions</name>
+    <author>ThemeXpert</author>
+    <creationDate>May 2011</creationDate>
+    <authorEmail>support@themexpert.com</authorEmail>
+    <authorUrl>http://www.themexpert.com</authorUrl>
+    <copyright>(C) 2008 - 2011 ThemeXpert, LLC. All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only</license>
+    <version>1.1</version>
+    <description>Automatic generation of box and captions for Joomla and K2 articles. Brought to you by ThemeXpert</description>
+    
+    <files>
+        <filename module="mod_xpertcaptions">mod_xpertcaptions.php</filename>
+        <filename>helper.php</filename>
+        <filename>index.html</filename>
+        <folder>admin</folder>
+        <folder>elements</folder>
+        <folder>interface</folder>
+        <folder>tmpl</folder>
+    </files>
+    
+    <params addpath="/modules/mod_xpertcaptions/elements">
+    
+        <param name="" type="assets" default="" label="" description=""/>
+        <param name="" type="comcheck" default="" label="" description=""/>
+
+        <param type="spacer" default="Content Source" />
+            <param name="content_source" type="list" default="joomla" label="Content Type" description="">
+                    <option value="joomla">Joomla Contents</option>
+                    <option value="k2">K2 Contents</option>
+            </param>
+
+        <!--Joomla Content Start-->
+        <param type="spacer" default="Joomla Contents" class="xt_joomla" />
+        
+            <param name="joomla_cat_id" type="category" default="" label="Category" description="A content category" />
+            
+            <param name="show_front" type="list" default="1" label="Show Frontpage Items" description="Show frontpage articles in this module ">
+                <option value="1">Show</option>
+                <option value="0">Hide</option>
+                <option value="2">Only Frontpage Items</option>
+            </param>
+            
+            <param name="item_ordering" type="list" default="" label="Item Ordering" description="">
+                <option value="">Default</option>
+                <option value="date">Oldest first</option>
+                <option value="rdate">Most recent first</option>
+                <option value="alpha">Title Alphabetical</option>
+                <option value="ralpha">Title Reverse-Alphabetical</option>
+                <option value="order">Ordering</option>
+            </param>
+        <!--Joomla Contents End-->
+
+        <!--K2 Contents Start-->
+        <param type="spacer" default="K2 Contents" class="xt_k2" />
+        
+            <param name="catfilter" type="radio" default="0" label="Category Filter" description="">
+              <option value="0">All</option>
+              <option value="1">Select</option>
+            </param>
+            
+            <param name="k2_cat_id" type="k2categories" default="" label="Select Category" description="You can select multiple category by holding ctrl key" />
+            
+            <param name="get_children" type="radio" default="0" label="Enable Children Category" description="Fetch items from children categories">
+                <option value="1">Enable</option>
+                <option value="0">Disable</option>
+            </param>
+            <param name="k2_item_ordering" type="list" default="" label="Ordering" description="">
+                <option value="">Default</option>
+                <option value="date">Oldest first</option>
+                <option value="rdate">Most recent first</option>
+                <option value="alpha">Title Alphabetical</option>
+                <option value="ralpha">Title Reverse-Alphabetical</option>
+                <option value="order">Ordering</option>
+                <option value="rorder">Ordering Reverse</option>
+                <!--<option value="hits">Most popular</option>-->
+                <option value="best">Highest rated</option>
+                <option value="comments">Most commented</option>
+                <option value="rand">Random ordering</option>
+            </param>
+            <param name="k2_featured_items" type="list" default="1" label="Featured Item" description="Show Featured Item in this module">
+                <option value="0">Hide</option>
+                <option value="1">Show</option>
+                <option value="2">Show only Featured Items</option>
+            </param>
+            
+            <param name="k2_img_size" type="list" default="M" label="Item Image Size" description="Select Item Image Size">
+                <option value="XS">XSmall</option>
+                <option value="S">Small</option>
+                <option value="M">Medium</option>
+                <option value="L">Large</option>
+                <option value="XL">XLarge</option>
+            </param>
+        <!--K2 item End-->
+
+        <!--General Settings Start-->
+        <param type="spacer" default="General Settings" label="" description="" />
+        
+            <param name="count" type="text" default="3" label="Max # of Items (0 = All)" description="The maximum numbers item to show. Use 0 to show them all" />
+
+            <param name="title" type="radio" default="1" label="Show Title" description="Show/Hide Articles Title">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </param>
+
+            <param name="intro" type="radio" default="0" label="Show Introtext" description="">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </param>
+
+
+            <param name="intro_limit" type="text" default="100" label="Introtext Limit" description="Introtext Characters Limit" />
+
+            <param name="link" type="radio" default="1" label="Link Article" description="Enable/Disable Article Linking">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </param>
+
+            <param name="width" type="text" default="250" label="Width" description="Container Width in pixel value" />
+
+            <param name="height" type="text" default="250" label="Height" description="Container Height in pixel value" />
+        <!--General Settings End-->
+
+        <!--Caption Settings Start-->
+        <param type="spacer" default="Caption Settings" label="" description="" />
+        <param type="help" default="" label="" description="" />
+
+            <param name="animation" type="list" default="slide" label="Animation" description="Select animation type fade/slide">
+                <option value="xc-fade">Fade</option>
+                <option value="xc-slide">Slide</option>
+            </param>
+
+            <param name="speed" type="text" default="150" label="Speed" description="Defines speed of the animation" />
+
+            <param name="opacity" type="text" default="1" label="Opacity" description="Accepts any value 0-1 (decimals included). Used to determine the opacity level the overlay is faded to when hovered over. Fade animation only" />
+
+            <param name="effect_apply" type="list" default="caption" label="Effect Applyed On" description="">
+                <option value="caption">Caption</option>
+                <option value="image">Image</option>
+            </param>
+            
+            <param name="anchor" type="list" default="left" label="Anchor" description="Horizontal and Vertical Anchor Point">
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+            </param>
+
+            <param name="anchor_position" type="text" default="-100" label="Anchor Position" description="Anchor Starting positions" />
+
+            <param name="hover_x" type="text" default="0" label="Hover X" description="Horizontal overlay hover positions.Width in pixed to be used."/>
+
+            <param name="hover_y" type="text" default="0" label="Hover Y" description="Horizontal overlay hover positions.Width in pixed to be used."/>
+        <!--Caption Settings End-->
+
+
+        <param type="spacer" default="Advance" />
+
+            <param name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="PARAMMODULECLASSSUFFIX" />
+
+            <param name="load_jquery" type="list" default="1" label="Load jQuery" description="">
+                <option value="1">Enable</option>
+                <option value="0">Disable</option>
+            </param>
+
+            <param name="jquery_source" type="list" default="local" label="jQuery Source" description="Select Jquery Source. Google CDN is recommended for live site.">
+                <option value="local">From Module Core</option>
+                <option value="google_cdn">From Google CDN</option>
+            </param>
+
+            <param name="cache" type="list" default="0" label="Caching" description="Select whether to cache the content of this module">
+                <option value="1">Use global</option>
+                <option value="0">No caching</option>
+		    </param>
+
+            <param name="cache_time" type="text" default="900" label="Cache Time" description="The time before the module is recached" />
+            
+    </params>
+</install>

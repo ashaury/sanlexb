@@ -1,0 +1,362 @@
+<?PHP
+
+/*
+ JoomlaXTC News Pro Module
+ version 1.0 (Joomla 1.5)
+ copyright (c) 2008 JoomlaXTC   www.joomlaxtc.com
+*/
+
+defined('_JEXEC') or die('Restricted access');
+require_once (JPATH_SITE.DS.'components'.DS.'com_content'.DS.'helpers'.DS.'route.php');
+
+if (!function_exists('jxtcParseRow')) {
+	function jxtcParseRow($row,$html,$aid,$maxintro) {
+		global $mainframe;
+			if($row->access <= $aid) {
+				$link = JRoute::_(ContentHelperRoute::getArticleRoute($row->slug, $row->catslug, $row->sectionid));
+			} else {
+				$link = JRoute::_('index.php?option=com_user&view=login');
+			}
+			$intro = $row->introtext;
+			$ini=strpos(strtolower($row->introtext),'<img');
+			if ($ini === false) $img = '';
+			else {
+				$ini = strpos($row->introtext,'src="',$ini)+5;
+				$fin = strpos($row->introtext,'"',$ini);
+				$img = substr($row->introtext,$ini,$fin-$ini);
+				$fin = strpos($row->introtext,'>',$fin);
+				$intro = substr($row->introtext,$fin+1);
+			}
+			if (!empty($maxintro)) $intro = trim(substr($intro,0,$maxintro)).'...';
+			
+			$hold = $html;
+			$hold = str_replace( '{link}', $link, $hold );
+			$hold = str_replace( '{title}', htmlspecialchars($row->title), $hold );
+			$hold = str_replace( '{intro}', $row->introtext, $hold );
+			$hold = str_replace( '{introtext}', '<p class="jnpp">'.$intro.'</p>', $hold );
+			$hold = str_replace( '{introimage}', $img, $hold );
+			$hold = str_replace( '{section}', $row->sec_title, $hold );
+			$hold = str_replace( '{category}', $row->cat_title, $hold );
+			$hold = str_replace( '{date}', $row->created, $hold );
+			$hold = str_replace( '{moddate}', $row->modified, $hold );
+			$hold = str_replace( '{author}', $row->author, $hold );
+			$hold = str_replace( '{authorid}', $row->authorid, $hold );
+		return $hold;
+	}
+}
+
+if (!function_exists('jxtcDrawMores')) {
+	global $mainframe;
+	function jxtcDrawMores($data) {
+		if ($data['moretext']) {
+			echo '<img src="modules/mod_jxtc_newspro/images/article-grey.gif">&nbsp;&nbsp;<span style="color:#'.$data['morergb'].'">'.$data['moretext'].'</span><br/>';
+		}
+		echo '<table width="100%" border="0" cellpadding="0" cellspacing="0"><tr>';
+		$i=1;
+		$c=1;
+		foreach ( $data['mores'] as $row ) {
+			if ($c==1) {
+				echo '<tr>';
+			}
+			echo '<td valign="top">'.jxtcParseRow($row,$data['morehtml'],$data['aid'],$data['moreintro']).'</td>';
+			$i++;$c++;
+			if ($c > $data['morecols']) {
+				echo '</tr>';
+				$c=1;
+			}
+		}
+		if ($c > 1) echo '</tr>';
+		echo '</table>';
+	}
+}
+
+if (!function_exists('jxtcDrawMain')) {
+	function jxtcDrawMain($rows,$data) {
+		global $mainframe;
+		$i=1;
+		$c=1;
+		$r=1;
+		$p=1;
+		
+		if ($data['pages'] > 1) {
+			$jshdr = '<script src="modules/mod_jxtc_newspro/js/jquery.js" type="text/javascript"></script>
+			<script src="modules/mod_jxtc_newspro/js/jcarousellite.js" type="text/javascript"></script>';
+			$jscall = '<script language="javascript" type="text/javascript" >
+				jQuery.noConflict();
+				jQuery(document).ready(function(){
+			  jQuery(".jnp'.$data['class'].'main").jCarouselLite({';
+			if ($data['autoscroll'] == 1) {
+				$jscall .= 'auto: '.$data['autopause'].', speed: '.$data['autospeed'].',';
+			}
+			if ($data['scrollstep'] != 1) {
+				$jscall .= 'scroll: '.$data['scrollstep'].',';
+			}
+			if ($data['mouse'] == 1) {
+				$jshdr .= '<script src="modules/mod_jxtc_newspro/js/jquery.mousewheel.js" type="text/javascript"></script>';
+				$jscall .= 'mouseWheel: true,';
+			}
+			if ($data['easingtype'] != 'none') {
+				$jshdr .= '<script src="modules/mod_jxtc_newspro/js/jquery.easing.js" type="text/javascript"></script>';
+				$jscall .= 'easing: "'.$data['easingtype'].'", speed: '.$data['easingspeed'].',';
+			}
+			if ($data['speed'] > 0) {
+				$jscall .= 'speed: '.$data['speed'].',';
+			}
+			if ($data['scrolltype'] == 'v') {
+				$jscall .= 'vertical: true,';
+			}
+			if ($data['circular'] == 0) {
+				$jscall .= 'circular: false,';
+			}
+			
+			$jscall .= '
+			      btnNext: ".jnp'.$data['class'].'prev",
+			      btnPrev: ".jnp'.$data['class'].'next"
+			  });
+			});
+			</script>';
+		
+			$mainframe->addCustomHeadTag($jshdr);
+			$mainframe->addCustomHeadTag($jscall);
+		//
+		// wrapper div for all newspro module, closest thing to css taming
+		//
+			switch ($data['layout']) {
+				case "0":	// none
+				echo '<div class="jnp'.$data['class'].'main" style="float:left">';
+				break;
+				case "1":	// left/right
+				echo '<img class="jnp'.$data['class'].'prev" src="modules/mod_jxtc_newspro/buttons/'.$data['button'].'/prev.gif" style="float:left"/>';
+				echo '<div class="jnp'.$data['class'].'main">';
+				break;
+				case "2":	// top
+				echo '<div><img class="jnp'.$data['class'].'prev" src="modules/mod_jxtc_newspro/buttons/'.$data['button'].'/prev.gif" style="float:left"/>';
+				echo '<img class="jnp'.$data['class'].'next" src="modules/mod_jxtc_newspro/buttons/'.$data['button'].'/next.gif" style="float:right"/></div>';
+				echo '<div class="jnp'.$data['class'].'main">';
+				break;
+				case "3":	// bottom
+				echo '<div class="jnp'.$data['class'].'main">';
+				break;
+				case "4":	// top/bottom
+				echo '<img class="jnp'.$data['class'].'prev" src="modules/mod_jxtc_newspro/buttons/'.$data['button'].'/prev.gif" />';
+				echo '<div class="jnp'.$data['class'].'main">';
+				break;
+			}
+			echo '<ul style="overflow:hidden">';
+			foreach ( $rows as $row ) {
+				if ($c==1 && $r==1) {
+					echo '<li><table width="100%" border="0" cellpadding="0" cellspacing="0">';
+				}
+				if ($c==1) {
+					echo '<tr>';
+				}
+		
+				echo '<td valign="top">'.jxtcParseRow($row,$data['html'],$data['aid'],$data['maxintro']).'</td>';
+				$i++;$c++;
+				if ($c > $data['columns']) {
+					echo '</tr>';
+					$c=1;
+					$r++;
+					if ($r > $data['lines'] && $i < $data['limit']) {
+						echo '</table></li>';
+						$r=1;
+						$p++;
+					}
+				}
+			}
+			if ($c > 1) echo '</tr>';
+			if ($r > 1) echo '</table></li>';
+			echo '</ul>';
+			switch ($data['layout']) {
+				case "0": // none
+				echo '</div>';
+				break;
+				case "1":	// left/right
+				echo '</div>';
+				echo '<img class="jnp'.$data['class'].'next" src="modules/mod_jxtc_newspro/buttons/'.$data['button'].'/next.gif" style="float:left"/>';
+				break;
+				case "2": // top
+				echo '</div>';
+				break;
+				case "3": // bottom
+				echo '</div>';
+				echo '<div style="margin:-6px 0px 0px 0px; padding-right:15px; background:url(modules/mod_jxtc_newspro/images/dotted.gif) 50px 0px no-repeat;"><img class="jnp'.$data['class'].'prev" src="modules/mod_jxtc_newspro/buttons/'.$data['button'].'/prev.gif"/>';
+				echo '<img class="jnp'.$data['class'].'next" src="modules/mod_jxtc_newspro/buttons/'.$data['button'].'/next.gif"/></div>';
+				break;
+				case "4": // top/bottom
+				echo '</div>';
+				echo '<img class="jnp'.$data['class'].'next" src="modules/mod_jxtc_newspro/buttons/'.$data['button'].'/next.gif" />';
+				break;
+			}
+		}
+		else {
+			echo '<table width="100%" border="0" cellpadding="0" cellspacing="0"><tr>';
+			foreach ( $rows as $row ) {
+				if ($c==1) {
+					echo '<tr>';
+				}
+				echo '<td valign="top">'.jxtcParseRow($row,$data['html'],$data['aid'],$data['maxintro']).'</td>';
+				$i++;$c++;
+				if ($c > $data['columns']) {
+					echo '</tr>';
+					$c=1;
+				}
+			}
+			if ($c > 1) echo '</tr>';
+			echo '</table>';
+		}
+	}
+}
+
+global $mainframe;
+
+$db				=& JFactory::getDBO();
+$data['user']			=& JFactory::getUser();
+$data['userId']		= $data['user']->get('id');
+$data['columns']	= trim( $params->get('columns',3) );
+$data['lines']		= $params->get('lines', 1);
+$data['pages']		= $params->get('pages', 1);
+$data['more']			= $params->get('more', 0);
+$data['moretext']	= trim($params->get('moretext', ''));
+$data['morehtml']	= $params->get('morehtml', '{title}');
+$data['morecols']	= trim( $params->get('morecols',1) );
+$data['morergb']	= trim( $params->get('morergb','cccccc') );
+$catid		= trim( $params->get('catid') );
+$secid		= trim( $params->get('secid') );
+$data['moreintro']	= trim( $params->get('moreintro') );
+$data['button']		= $params->get('button','default');
+$data['html']			= trim( $params->get('html','{intro}') );
+$data['maxintro']	= trim( $params->get('maxintro') );
+$showfrontpage	= $params->get('show_front', 1);
+$data['class'] 		= trim($params->get('moduleclass_sfx'));
+$data['class'] = uniqid('jxtc');
+$data['autoscroll']	= $params->get('autoscroll',0);
+$data['autospeed']	= $params->get('autospeed',1000);
+$data['autopause']	= $params->get('autopause',800);
+$data['scrollstep']	= $params->get('scrollstep',1);
+$data['mouse']	= $params->get('mouse',0);
+$data['easingtype']	= $params->get('easingtype','none');
+$data['easingspeed']	= $params->get('easingspeed',0);
+$data['speed']	= $params->get('speed',0);
+$data['scrolltype']	= $params->get('scrolltype','h');
+$data['circular']	= $params->get('circular',1);
+$data['layout']	= $params->get('layout',1);
+$data['width']	= $params->get('width',100);
+$data['height']	= $params->get('height',100);
+$data['aid']			= $data['user']->get('aid', 0);
+$data['contentconfig'] = &JComponentHelper::getParams( 'com_content' );
+$accesslevel		= !$data['contentconfig']->get('show_noauth');
+$morepos		= $params->get('morepos', 'b');
+
+$nullDate	= $db->getNullDate();
+
+$date =& JFactory::getDate();
+$now = $date->toMySQL();
+
+$where		= 'a.state = 1'
+	. ' AND ( a.publish_up = '.$db->Quote($nullDate).' OR a.publish_up <= '.$db->Quote($now).' )'
+	. ' AND ( a.publish_down = '.$db->Quote($nullDate).' OR a.publish_down >= '.$db->Quote($now).' )'
+	;
+
+// User Filter
+switch ($params->get( 'user_id' )) {
+	case 'by_me':
+		$where .= ' AND (created_by = ' . (int) $data['userId'] . ' OR modified_by = ' . (int) $data['userId'] . ')';
+		break;
+	case 'not_me':
+		$where .= ' AND (created_by <> ' . (int) $data['userId'] . ' AND modified_by <> ' . (int) $data['userId'] . ')';
+		break;
+}
+
+// Ordering
+switch ($params->get( 'ordering' )) {
+	case 'm_dsc':
+		$ordering		= 'a.modified DESC, a.created DESC';
+		break;
+	case 'c_dsc':
+	default:
+		$ordering		= 'a.created DESC';
+		break;
+}
+
+if ($catid) {
+	$ids = explode( ',', $catid );
+	JArrayHelper::toInteger( $ids );
+	$catCondition = ' AND (cc.id=' . implode( ' OR cc.id=', $ids ) . ')';
+}
+if ($secid) {
+	$ids = explode( ',', $secid );
+	JArrayHelper::toInteger( $ids );
+	$secCondition = ' AND (s.id=' . implode( ' OR s.id=', $ids ) . ')';
+}
+
+// Content Items only
+$query = 'SELECT a.*, cc.title as cat_title, s.title as sec_title, u.name as author, u.username as authorid,' .
+	' CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(":", a.id, a.alias) ELSE a.id END as slug,'.
+	' CASE WHEN CHAR_LENGTH(cc.alias) THEN CONCAT_WS(":", cc.id, cc.alias) ELSE cc.id END as catslug'.
+	' FROM #__content AS a' .
+	($showfrontpage == '0' ? ' LEFT JOIN #__content_frontpage AS f ON f.content_id = a.id' : '') .
+	' INNER JOIN #__categories AS cc ON cc.id = a.catid' .
+	' INNER JOIN #__sections AS s ON s.id = a.sectionid' .
+	' INNER JOIN #__users AS u ON u.id = a.created_by' .
+	' WHERE '. $where .' AND s.id > 0' .
+	($accesslevel ? ' AND a.access <= ' .(int) $data['aid']. ' AND cc.access <= ' .(int) $data['aid']. ' AND s.access <= ' .(int) $data['aid'] : '').
+	($catid ? $catCondition : '').
+	($secid ? $secCondition : '').
+	($showfrontpage == '0' ? ' AND f.content_id IS NULL ' : '').
+	' AND s.published = 1' .
+	' AND cc.published = 1' .
+	' ORDER BY '. $ordering;
+	$data['limit'] = $data['columns']*$data['lines']*$data['pages'];
+$db->setQuery($query, 0, $data['limit']+$data['more']);
+$items = $db->loadObjectList();
+
+if (count($items) == 0) return;	// Return empty
+
+$rows = array_slice($items,0,$data['limit']);
+$data['mores'] = array_slice($items,$data['limit']);
+
+echo '<div style="width:'.$data['width'].'; height:'.$data['height'].';overflow:hidden">';
+switch ($morepos) {
+	case 't':
+	if (count ($data['mores']) > 0) {
+		echo '<div>';
+		jxtcDrawMores($data);
+		echo '</div>';
+	}
+	echo '<div>';
+	jxtcDrawMain($rows,$data);
+	echo '</div>';
+	break;
+	case 'l':
+	if (count ($data['mores']) > 0) {
+		echo '<div style="float:left;width:auto">';
+		jxtcDrawMores($data);
+		echo '</div>';
+	}
+	echo '<div style="float:left;widt:auto">';
+	jxtcDrawMain($rows,$data);
+	echo '</div>';
+	break;
+	case 'r':
+	echo '<div style="float:left;width:auto">';
+	jxtcDrawMain($rows,$data);
+	echo '</div>';
+	if (count ($data['mores']) > 0) {
+		echo '<div style="float:left;width:auto">';
+		jxtcDrawMores($data);
+		echo '</div>';
+	}
+	break;
+	default:
+	echo '<div>';
+	jxtcDrawMain($rows,$data);
+	echo '</div>';
+	if (count ($data['mores']) > 0) {
+		echo '<div>';
+		jxtcDrawMores($data);
+		echo '</div>';
+	}
+	break;
+}
+echo '</div>';

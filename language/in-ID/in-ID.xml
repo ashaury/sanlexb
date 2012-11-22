@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Id -->
+<metafile version="1.5"  client="site" >
+	<tag>in-ID</tag>
+	<name>Bahasa Indonesia</name>
+      <version>1.0.0</version>
+	<creationDate>August 2008</creationDate>
+	<author>Muh. Burhanuddin</author>
+	<authorEmail>burhan@indonesiafreight.com</authorEmail>
+	<authorUrl>www.indonesiafreight.com</authorUrl>
+	<copyright>Copyright (C) 2008 Indonesia Freight Online</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<description>Bahasa Indonesia for Joomla 1.5.4</description>
+	<metadata>
+		<name>Indonesian (ID)</name>
+		<tag>in-ID</tag>
+		<rtl>0</rtl>
+		<locale>in_ID.utf8, in_ID.UTF-8, in_ID, ina_ID, id, bahasa-indonesia, bahasa.indonesia, indonesia, indonesian, sumatra, jawa, kalimantan, sulawesi, papua, republik-indonesia</locale>
+		<winCodePage>iso-8859-1</winCodePage>
+		<backwardLang>Indonesian</backwardLang>
+		<pdfFontName>freesans</pdfFontName> 
+	</metadata>
+	<params />
+</metafile>
