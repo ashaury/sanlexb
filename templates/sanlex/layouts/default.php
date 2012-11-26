@@ -73,11 +73,13 @@ echo $this->getRandomImage($this->templatepath().DS.'images/header'); ?>);" clas
 	$sliderul = $this->calSpotlight ($spotlight,100);
 	if( $sliderul ) :
 	?>
+    
     <div style="position:relative; height:550px">
     <div id="ultimate-slider">
 	<jdoc:include type="modules" name="user3" style="JAxhtml" />
     </div>
     </div>
+    
     <?php
 	endif;
 	?>
