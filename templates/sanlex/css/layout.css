@@ -61,7 +61,7 @@
 
 /* MAIN COLUMN
 --------------------------------------------------------- */
-#ja-mainbody { float: left; }
+#ja-mainbody { /*float: left;*/ }
 #ja-current-content, #ja-main { float: right; }
 
 /* SIDE COLUMNS

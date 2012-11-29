@@ -2367,8 +2367,8 @@ ul.accordion li .navi img{
 	width:500px;
 	min-height:500px;
 	/*background:#000;*/
-	float:left;
-	margin:50px 5px;
+	float:right;
+	margin:5px 5px;
 }
 .komb-panel2{
 	width:300px;
@@ -2410,7 +2410,6 @@ ul.accordion li .navi img{
 }
 .komb-card{
 	cursor:pointer;
-	float:left;
 }
 
 .komb-card img{
