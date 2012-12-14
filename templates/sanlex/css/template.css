@@ -2364,7 +2364,7 @@ ul.accordion li .navi img{
 }
 
 .komb-panel1{
-	width:500px;
+	width:783px;
 	min-height:500px;
 	/*background:#000;*/
 	float:left;
@@ -2392,9 +2392,17 @@ ul.accordion li .navi img{
 	padding-left:0 !important;
 }
 .img-komb{
-	width:100%;
-	height:357px;
+	/*width:100%;*/
+	/*width:780px;*/
+	width:640px;
+	/*height:350px;*/
+	height:493px;
 	background:url(../images/kombinasi/interior-a-1.jpg);
+	/*border-radius: 20px 20px 20px 20px;
+	border: 5px solid rgb(255, 255, 255);*/
+	float:right;
+	margin-bottom:-150px;
+
 }
 .desk-komb{
 	/*width:100%;*/
@@ -2411,6 +2419,7 @@ ul.accordion li .navi img{
 .komb-card{
 	cursor:pointer;
 	float:left;
+	border-radius:5px;
 }
 
 .komb-card img{
@@ -2462,7 +2471,8 @@ ul.accordion li .navi img{
 .prod-desk1{
 	position:relative;
 	width:226px;
-	height:175px;
+	height:200px;
+	/*height:175px;*/
 	float:right;
 	/*background:rgba(204,204,204,0.8);*/
 	margin:20px 0 0 5px;
@@ -2478,7 +2488,7 @@ ul.accordion li .navi img{
 	z-index:-1;
 }
 .prod-desk1 ul li{
-	background:url(../images/centang.png) left no-repeat;
+	background:url(../images/centang.png) top left no-repeat;
 }
 .prod-desk1 div{
 	z-index:3;
@@ -2521,4 +2531,26 @@ ul.accordion li .navi img{
 }
 .prod-use div img{
 	position:relative;
+}
+.prod-spek table tr td{
+	vertical-align:top;
+	font-size:12px;
+}
+.prod-card{
+	margin-top:60px;
+	color:#FFFFFF;
+}
+.prod-card img{
+	border:2px solid #f6f6f6;
+	border-radius:5px;
+}
+.prod-card a[data-lightbox]{
+	display:inline !important ;
+}
+.komb-panel1 h3{
+	color:#F6F6F6;
+	text-shadow:#999999;
+}
+.komb-card-con{
+	margin-left:135px;
 }
