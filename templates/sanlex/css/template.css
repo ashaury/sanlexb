@@ -2554,3 +2554,7 @@ ul.accordion li .navi img{
 .komb-card-con{
 	margin-left:135px;
 }
+
+div.mainWrapper{
+	margin:0 !important;
+}
