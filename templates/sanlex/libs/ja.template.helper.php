@@ -363,7 +363,8 @@ class JATemplateHelper1 {
 
         //generate a random number between 0 and the number of images
         $random = mt_rand(0, count($imglist)-1);
-        $image = $imglist[$random];
+        //$image = $imglist[$random];
+		$image = $imglist[0];
 
         return $image;
     }

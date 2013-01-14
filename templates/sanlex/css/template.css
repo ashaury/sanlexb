@@ -318,7 +318,7 @@ form#searchForm { border-top: 1px solid #ccc; padding: 15px 0; }
 
 /* Meta ---*/
 .article-tools {
-	background: #744823;
+	/*background: #744823;*/
 	/*border: 1px solid #ddd;*/
 	clear: both;
 	color: #fff;
@@ -341,6 +341,7 @@ form#searchForm { border-top: 1px solid #ccc; padding: 15px 0; }
 .createdate {
 	background: url(../images/icon-date.gif) no-repeat 0 2px;
 	padding: 3px 3px 3px 20px;
+	float:right;
 }
 
 .modifydate { color: #F6F6F6; display: block; margin: 10px 0; }
@@ -2557,4 +2558,8 @@ ul.accordion li .navi img{
 
 div.mainWrapper{
 	margin:0 !important;
+}
+
+.fbsanlex{
+	background:#FFFFFF;
 }
