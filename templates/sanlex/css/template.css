@@ -2563,3 +2563,9 @@ div.mainWrapper{
 .fbsanlex{
 	background:#FFFFFF;
 }
+
+.slide-proyek{
+	float:right;
+	box-shadow:#FFFFFF;
+	border-radius:10px;
+}
