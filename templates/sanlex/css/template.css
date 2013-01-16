@@ -79,7 +79,7 @@ body.fs5 { font-size: 14px; }
 body.fs6 { font-size: 15px; }
 
 /* Normal links ---*/
-a { color: #ff1901; text-decoration: underline; }
+a { /*color: #ff1901;*/ color: #fff; text-decoration: underline; }
 
 a:hover, a:active, a:focus { color: #f6f6f6; text-decoration: underline; }
 
@@ -341,7 +341,7 @@ form#searchForm { border-top: 1px solid #ccc; padding: 15px 0; }
 .createdate {
 	background: url(../images/icon-date.gif) no-repeat 0 2px;
 	padding: 3px 3px 3px 20px;
-	float:right;
+	color:red;
 }
 
 .modifydate { color: #F6F6F6; display: block; margin: 10px 0; }
@@ -2568,4 +2568,9 @@ div.mainWrapper{
 	float:right;
 	box-shadow:#FFFFFF;
 	border-radius:10px;
+}
+.art-subject{
+	position:fixed;
+	bottom:0;
+	margin:0 0 32px 0 !important;
 }
