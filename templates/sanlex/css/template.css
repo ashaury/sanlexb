@@ -2573,4 +2573,29 @@ div.mainWrapper{
 	position:fixed;
 	bottom:0;
 	margin:0 0 32px 0 !important;
+	z-index:999;
+}
+.tagline{
+	font-size:30px;
+	text-align:center;
+	display:block;
+	border:0 0 0 0 #F00;
+	padding:6px 0 9px 0;
+	background:#f97817;
+	color:#FFFFFF;
+	font-style:italic;
+}
+.home-tagline{
+	font-size:40px;
+	text-align:center;
+	color:#FFFFFF;
+	display:block;
+	font-style:italic;
+	text-shadow:0px 1px 0px rgba(255, 255, 255, 0.15)
+}
+.home-tagline2{
+	text-align:center;
+	color:#FFFFFF;
+	display:block;
+	background:url(../images/mod_headline.png) repeat-x 0 12px;
 }
